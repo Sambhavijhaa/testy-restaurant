@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery | Testy Restaurant</title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- MAIN CSS -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css">
+
+</head>
+
+
+<body class="gallery-page">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+
+    <div class="logo">
+        Testy Restaurant
+    </div>
+
+
+    <div class="menu-toggle">
+        ☰
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="menu.html">
+                Menu
+            </a>
+        </li>
+
+        <li>
+            <a href="order.html">
+                Order
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a class="active"
+               href="gallery.html">
+                Gallery
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <!-- CART -->
+
+    <div class="cart-icon"
+         id="cartIcon">
+
+        🛒
+
+        <span id="cartCount">
+            0
+        </span>
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <div class="user-profile">
+
+        <button
+            class="profile-trigger"
+            id="profileTrigger"
+            type="button">
+
+            <span
+                class="profile-avatar-small"
+                id="navAvatar">
+
+                U
+
+            </span>
+
+            <span class="profile-arrow">
+                ▾
+            </span>
+
+        </button>
+
+
+        <div
+            class="profile-dropdown"
+            id="profileDropdown">
+
+            <div class="profile-dropdown-header">
+
+                <div
+                    class="profile-dropdown-avatar"
+                    id="dropdownAvatar">
+
+                    U
+
+                </div>
+
+                <div>
+
+                    <h4 id="navUserName">
+                        Guest User
+                    </h4>
+
+                    <p id="navUserEmail">
+                        Welcome to Testy Restaurant
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="dropdown-line"></div>
+
+
+            <a href="profile.html">
+                <span>👤</span>
+                My Profile
+            </a>
+
+
+            <a href="order.html">
+                <span>🛍</span>
+                My Orders
+            </a>
+
+
+            <a href="profile.html">
+                <span>📅</span>
+                My Reservations
+            </a>
+
+
+            <div class="dropdown-line"></div>
+
+
+            <a href="auth/login.html"
+               id="loginLink">
+
+                <span>🔐</span>
+                Login
+
+            </a>
+
+
+            <button
+                type="button"
+                id="navLogout">
+
+                <span>↪</span>
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOOK TABLE -->
+
+    <a
+        href="reservation.html"
+        class="btn">
+
+        Book Table
+
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     GALLERY HERO
+===================================================== -->
+
+<section class="gallery-hero">
+
+    <div class="gallery-hero-overlay"></div>
+
+
+    <div class="gallery-hero-content">
+
+        <span class="gallery-label">
+            TESTY RESTAURANT
+        </span>
+
+
+        <h1>
+            A Taste of
+            <strong>Elegance</strong>
+        </h1>
+
+
+        <div class="gallery-line"></div>
+
+
+        <p>
+            Explore our food, atmosphere and
+            unforgettable dining moments.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     GALLERY INTRO
+===================================================== -->
+
+<section class="gallery-intro">
+
+    <span>
+        OUR GALLERY
+    </span>
+
+    <h2>
+        Moments Worth
+        <strong>Remembering</strong>
+    </h2>
+
+    <p>
+        From beautifully crafted dishes to elegant
+        dining spaces, every detail at Testy Restaurant
+        is created to make your experience special.
+    </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     PREMIUM GALLERY
+===================================================== -->
+
+<section class="premium-gallery">
+
+
+    <div class="gallery-grid">
+
+
+        <!-- LARGE IMAGE -->
+
+        <div class="gallery-card gallery-large">
+
+            <img
+                src="assets/images/gallery1.jpg"
+                alt="Elegant restaurant dining">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        ATMOSPHERE
+                    </span>
+
+                    <h3>
+                        Elegant Dining
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BURGER -->
+
+        <div class="gallery-card">
+
+            <img
+                src="assets/images/food1.jpg"
+                alt="Classic Burger">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        SIGNATURE DISH
+                    </span>
+
+                    <h3>
+                        Classic Burger
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PIZZA -->
+
+        <div class="gallery-card">
+
+            <img
+                src="assets/images/food2.jpg"
+                alt="Fresh Pizza">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        ITALIAN
+                    </span>
+
+                    <h3>
+                        Fresh Pizza
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PASTA -->
+
+        <div class="gallery-card">
+
+            <img
+                src="assets/images/food3.jpg"
+                alt="Creamy Pasta">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        CHEF SPECIAL
+                    </span>
+
+                    <h3>
+                        Creamy Pasta
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CHEF -->
+
+        <div class="gallery-card">
+
+            <img
+                src="assets/images/chef1.jpg"
+                alt="Our Expert Chef">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        OUR TEAM
+                    </span>
+
+                    <h3>
+                        Expert Chefs
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXTRA LARGE FOOD -->
+
+        <div class="gallery-card gallery-wide">
+
+            <img
+                src="assets/images/food4.jpg"
+                alt="Premium Restaurant Dish">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        PREMIUM CUISINE
+                    </span>
+
+                    <h3>
+                        Crafted With Passion
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SECOND CHEF -->
+
+        <div class="gallery-card">
+
+            <img
+                src="assets/images/chef2.jpg"
+                alt="Pastry Chef">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        OUR TEAM
+                    </span>
+
+                    <h3>
+                        Pastry Chef
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- THIRD CHEF -->
+
+        <div class="gallery-card">
+
+            <img
+                src="assets/images/chef3.jpg"
+                alt="Italian Chef">
+
+            <div class="gallery-overlay">
+
+                <div>
+
+                    <span>
+                        ITALIAN CUISINE
+                    </span>
+
+                    <h3>
+                        Culinary Art
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EXPERIENCE SECTION
+===================================================== -->
+
+<section class="gallery-experience">
+
+    <div>
+
+        <span>
+            EXPERIENCE TESTY
+        </span>
+
+        <h2>
+            More Than Just
+            <strong>A Meal</strong>
+        </h2>
+
+        <p>
+            Every plate tells a story. Every table creates
+            a memory. Come experience the atmosphere,
+            flavors and hospitality of Testy Restaurant.
+        </p>
+
+
+        <a
+            href="reservation.html"
+            class="gallery-button">
+
+            Reserve Your Table
+
+            <span>
+                →
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <div class="footer-box">
+
+            <h3>
+                Testy Restaurant
+            </h3>
+
+            <p>
+                Enjoy premium dining with fresh
+                ingredients, delicious recipes,
+                and exceptional service.
+            </p>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="menu.html">
+                Menu
+            </a>
+
+            <a href="gallery.html">
+                Gallery
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>
+                Opening Hours
+            </h3>
+
+            <p>
+                Monday - Friday
+            </p>
+
+            <p>
+                10:00 AM - 10:00 PM
+            </p>
+
+            <br>
+
+            <p>
+                Saturday - Sunday
+            </p>
+
+            <p>
+                9:00 AM - 11:00 PM
+            </p>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>
+                Follow Us
+            </h3>
+
+            <a href="#">
+                Facebook
+            </a>
+
+            <a href="#">
+                Instagram
+            </a>
+
+            <a href="#">
+                Twitter
+            </a>
+
+            <a href="#">
+                YouTube
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Testy Restaurant.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     PROFILE SCRIPT
+===================================================== -->
+
+<script>
+
+const profileTrigger =
+    document.getElementById(
+        "profileTrigger"
+    );
+
+const profileDropdown =
+    document.getElementById(
+        "profileDropdown"
+    );
+
+
+if (
+    profileTrigger &&
+    profileDropdown
+) {
+
+    profileTrigger.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            profileDropdown.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                !profileDropdown.contains(
+                    event.target
+                ) &&
+                !profileTrigger.contains(
+                    event.target
+                )
+            ) {
+
+                profileDropdown.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* LOAD USER */
+
+const savedUser =
+    JSON.parse(
+        localStorage.getItem(
+            "testyUser"
+        )
+    );
+
+
+if (savedUser) {
+
+    const name =
+        savedUser.name || "User";
+
+    const email =
+        savedUser.email || "";
+
+    const letter =
+        name.charAt(0).toUpperCase();
+
+
+    document.getElementById(
+        "navUserName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "navUserEmail"
+    ).textContent =
+        email;
+
+
+    document.getElementById(
+        "navAvatar"
+    ).textContent =
+        letter;
+
+
+    document.getElementById(
+        "dropdownAvatar"
+    ).textContent =
+        letter;
+
+}
+
+
+
+/* LOGOUT */
+
+const navLogout =
+    document.getElementById(
+        "navLogout"
+    );
+
+
+if (navLogout) {
+
+    navLogout.addEventListener(
+        "click",
+        function() {
+
+            localStorage.removeItem(
+                "testyLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "testyUser"
+            );
+
+            window.location.href =
+                "auth/login.html";
+
+        }
+    );
+
+}
+
+</script>
+
+
+<script
+    src="assets/js/script.js">
+</script>
+
+
+</body>
+</html>
