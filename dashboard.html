@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | Testy Restaurant</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <i class="fa-solid fa-utensils"></i>
+
+            <h2>TESTY</h2>
+
+            <span>Restaurant Admin</span>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <i class="fa-solid fa-chart-pie"></i>
+                Dashboard
+            </li>
+
+            <li>
+                <i class="fa-solid fa-bowl-food"></i>
+                Menu
+            </li>
+
+            <li>
+                <i class="fa-solid fa-cart-shopping"></i>
+                Orders
+            </li>
+
+            <li>
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservations
+            </li>
+
+            <li>
+                <i class="fa-solid fa-users"></i>
+                Customers
+            </li>
+
+            <li>
+                <i class="fa-solid fa-image"></i>
+                Gallery
+            </li>
+
+            <li>
+                <i class="fa-solid fa-chart-line"></i>
+                Analytics
+            </li>
+
+            <li>
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </li>
+
+            <li>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <!-- Top Navigation -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                type="text"
+                placeholder="Search anything...">
+
+            </div>
+
+            <div class="top-icons">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <div class="admin-info">
+
+                    <img src="../assets/images/chef1.jpg">
+
+                    <div>
+
+                        <h4>Administrator</h4>
+
+                        <span>Super Admin</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Welcome -->
+
+        <section class="welcome">
+
+            <h1>Welcome Back 👋</h1>
+
+            <p>
+
+                Here's what's happening in your restaurant today.
+
+            </p>
+
+        </section>
+<!-- ===========================
+     Statistics Cards
+=========================== -->
+
+<section class="stats">
+
+    <div class="stat-card revenue">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-dollar-sign"></i>
+        </div>
+
+        <div class="stat-info">
+            <h2>$24,580</h2>
+            <p>Total Revenue</p>
+            <span>↑ +18% this month</span>
+        </div>
+
+    </div>
+
+    <div class="stat-card orders">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+
+        <div class="stat-info">
+            <h2>1,248</h2>
+            <p>Total Orders</p>
+            <span>↑ +12% today</span>
+        </div>
+
+    </div>
+
+    <div class="stat-card customers">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div class="stat-info">
+            <h2>864</h2>
+            <p>Customers</p>
+            <span>↑ +8% this week</span>
+        </div>
+
+    </div>
+
+    <div class="stat-card reservations">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+        </div>
+
+        <div class="stat-info">
+            <h2>73</h2>
+            <p>Reservations</p>
+            <span>Today's bookings</span>
+        </div>
+
+    </div>
+
+</section>
+<!-- ===========================
+     Dashboard Content
+=========================== -->
+
+<section class="dashboard-grid">
+
+    <!-- Sales Chart -->
+
+    <div class="dashboard-card chart-card">
+
+        <div class="card-header">
+
+            <h2>Sales Analytics</h2>
+
+            <button>Monthly</button>
+
+        </div>
+
+<div class="chart-container">
+
+    <canvas id="salesChart"></canvas>
+
+</div>
+    </div>
+
+    <!-- Popular Foods -->
+<div class="dashboard-card">
+
+    <div class="card-header">
+
+        <h2>Top Selling Foods</h2>
+
+        <button>This Week</button>
+
+    </div>
+
+    <!-- Food 1 -->
+
+    <div class="food-item">
+
+        <img src="../assets/images/food1.jpg">
+
+        <div class="food-details">
+
+            <h4>Classic Burger</h4>
+
+            <p>⭐⭐⭐⭐⭐ (4.9)</p>
+
+            <div class="progress">
+
+                <div class="progress-bar" style="width:92%"></div>
+
+            </div>
+
+        </div>
+
+        <span class="food-price">$3,240</span>
+
+    </div>
+
+    <!-- Food 2 -->
+
+    <div class="food-item">
+
+        <img src="../assets/images/food2.jpg">
+
+        <div class="food-details">
+
+            <h4>Italian Pizza</h4>
+
+            <p>⭐⭐⭐⭐⭐ (4.8)</p>
+
+            <div class="progress">
+
+                <div class="progress-bar" style="width:84%"></div>
+
+            </div>
+
+        </div>
+
+        <span class="food-price">$2,870</span>
+
+    </div>
+
+    <!-- Food 3 -->
+
+    <div class="food-item">
+
+        <img src="../assets/images/food3.jpg">
+
+        <div class="food-details">
+
+            <h4>Creamy Pasta</h4>
+
+            <p>⭐⭐⭐⭐ (4.7)</p>
+
+            <div class="progress">
+
+                <div class="progress-bar" style="width:76%"></div>
+
+            </div>
+
+        </div>
+
+        <span class="food-price">$2,150</span>
+
+    </div>
+
+</div>
+
+    </div>
+
+</section>
+
+    </main>
+
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>
