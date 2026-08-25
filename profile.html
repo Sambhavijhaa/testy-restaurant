@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Testy Restaurant</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+
+<body class="profile-page">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Testy Restaurant
+    </div>
+
+
+    <div class="menu-toggle">
+        ☰
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="menu.html">
+                Menu
+            </a>
+        </li>
+
+        <li>
+            <a href="order.html">
+                Order
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="gallery.html">
+                Gallery
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="cart-icon">
+
+        🛒
+
+        <span id="cartCount">
+            0
+        </span>
+
+    </div>
+
+
+    <a
+        href="reservation.html"
+        class="btn">
+
+        Book Table
+
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     PROFILE HERO
+===================================================== -->
+
+<section class="profile-hero">
+
+    <div class="profile-hero-overlay"></div>
+
+    <div class="profile-hero-content">
+
+        <span>
+            TESTY RESTAURANT
+        </span>
+
+        <h1>
+            My <strong>Profile</strong>
+        </h1>
+
+        <div class="profile-gold-line"></div>
+
+        <p>
+            Manage your account, orders and reservations.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROFILE SECTION
+===================================================== -->
+
+<section class="profile-section">
+
+
+    <div class="profile-container">
+
+
+        <!-- =================================================
+             PROFILE SIDEBAR
+        ================================================== -->
+
+        <aside class="profile-sidebar">
+
+
+            <div class="profile-avatar">
+
+                <span id="avatarLetter">
+                    U
+                </span>
+
+            </div>
+
+
+            <h2 id="profileName">
+                User
+            </h2>
+
+
+            <p id="profileEmail">
+                user@example.com
+            </p>
+
+
+            <div class="profile-divider"></div>
+
+
+            <button
+                class="profile-nav active"
+                data-section="account">
+
+                👤
+                Account
+
+            </button>
+
+
+            <button
+                class="profile-nav"
+                data-section="orders">
+
+                🛍
+                My Orders
+
+            </button>
+
+
+            <button
+                class="profile-nav"
+                data-section="reservations">
+
+                📅
+                Reservations
+
+            </button>
+
+
+            <button
+                class="profile-nav"
+                data-section="addresses">
+
+                📍
+                Addresses
+
+            </button>
+
+
+            <button
+                class="profile-nav logout-btn"
+                id="logoutBtn">
+
+                ↪
+                Logout
+
+            </button>
+
+
+        </aside>
+
+
+
+        <!-- =================================================
+             PROFILE CONTENT
+        ================================================== -->
+
+        <main class="profile-content">
+
+
+            <!-- ACCOUNT -->
+
+            <div
+                class="profile-panel active-panel"
+                id="account">
+
+
+                <div class="profile-panel-header">
+
+                    <div>
+
+                        <span>
+                            ACCOUNT
+                        </span>
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="profile-form">
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="userName"
+                            value="User">
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="userEmail"
+                            value="user@example.com">
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="userPhone"
+                            placeholder="+91 XXXXX XXXXX">
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            id="userBirthday">
+
+                    </div>
+
+
+                    <button
+                        class="profile-save"
+                        id="saveProfile">
+
+                        Save Changes
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ORDERS
+            ================================================== -->
+
+            <div
+                class="profile-panel"
+                id="orders">
+
+
+                <div class="profile-panel-header">
+
+                    <div>
+
+                        <span>
+                            ORDER HISTORY
+                        </span>
+
+                        <h2>
+                            My Orders
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="order-history">
+
+
+                    <div class="profile-order">
+
+                        <div>
+
+                            <span>
+                                ORDER #1001
+                            </span>
+
+                            <h3>
+                                Classic Burger × 2
+                            </h3>
+
+                            <p>
+                                24 August 2026
+                            </p>
+
+                        </div>
+
+
+                        <div class="order-right">
+
+                            <strong>
+                                $25.98
+                            </strong>
+
+                            <span class="order-status">
+                                Delivered
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-order">
+
+                        <div>
+
+                            <span>
+                                ORDER #1002
+                            </span>
+
+                            <h3>
+                                Margherita Pizza × 1
+                            </h3>
+
+                            <p>
+                                20 August 2026
+                            </p>
+
+                        </div>
+
+
+                        <div class="order-right">
+
+                            <strong>
+                                $14.99
+                            </strong>
+
+                            <span class="order-status">
+                                Delivered
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RESERVATIONS
+            ================================================== -->
+
+            <div
+                class="profile-panel"
+                id="reservations">
+
+
+                <div class="profile-panel-header">
+
+                    <div>
+
+                        <span>
+                            TABLE BOOKINGS
+                        </span>
+
+                        <h2>
+                            My Reservations
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reservation-history">
+
+
+                    <div class="profile-reservation">
+
+                        <div class="reservation-date">
+
+                            <strong>
+                                28
+                            </strong>
+
+                            <span>
+                                AUG
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Dinner Reservation
+                            </h3>
+
+                            <p>
+                                7:30 PM • 4 Guests
+                            </p>
+
+                            <p>
+                                Testy Restaurant
+                            </p>
+
+                        </div>
+
+
+                        <span class="reservation-status">
+                            Confirmed
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADDRESSES
+            ================================================== -->
+
+            <div
+                class="profile-panel"
+                id="addresses">
+
+
+                <div class="profile-panel-header">
+
+                    <div>
+
+                        <span>
+                            DELIVERY
+                        </span>
+
+                        <h2>
+                            Saved Addresses
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="address-card">
+
+
+                    <div class="address-icon">
+                        🏠
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            HOME
+                     <!-- =================================================
+     SAVED ADDRESS
+================================================= -->
+
+<div class="address-card" id="addressCard">
+
+    <div class="address-icon">
+        🏠
+    </div>
+
+    <div class="address-information">
+
+        <span>
+            HOME
+        </span>
+
+        <h3 id="savedAddressTitle">
+            Home Address
+        </h3>
+
+        <p id="savedAddress">
+            No address added yet.
+        </p>
+
+    </div>
+
+    <button
+        type="button"
+        class="address-edit-btn"
+        id="editAddressBtn">
+
+        Edit
+
+    </button>
+
+</div>
+
+
+<!-- =================================================
+     ADDRESS FORM
+================================================= -->
+
+<div
+    class="address-form"
+    id="addressForm">
+
+    <div class="profile-panel-header">
+
+        <div>
+
+            <span>
+                DELIVERY ADDRESS
+            </span>
+
+            <h2>
+                Edit Your Address
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="address-form-grid">
+
+
+        <div class="profile-field">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="addressName"
+                placeholder="Enter your full name">
+
+        </div>
+
+
+        <div class="profile-field">
+
+            <label>
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="addressPhone"
+                placeholder="+91 XXXXX XXXXX">
+
+        </div>
+
+
+        <div class="profile-field full-width">
+
+            <label>
+                Address
+            </label>
+
+            <input
+                type="text"
+                id="addressLine"
+                placeholder="House / Flat / Street">
+
+        </div>
+
+
+        <div class="profile-field">
+
+            <label>
+                City
+            </label>
+
+            <input
+                type="text"
+                id="addressCity"
+                placeholder="City">
+
+        </div>
+
+
+        <div class="profile-field">
+
+            <label>
+                State
+            </label>
+
+            <input
+                type="text"
+                id="addressState"
+                placeholder="State">
+
+        </div>
+
+
+        <div class="profile-field">
+
+            <label>
+                PIN Code
+            </label>
+
+            <input
+                type="text"
+                id="addressPin"
+                placeholder="PIN Code">
+
+        </div>
+
+
+    </div>
+
+
+    <div class="address-form-buttons">
+
+        <button
+            type="button"
+            class="address-cancel"
+            id="cancelAddress">
+
+            Cancel
+
+        </button>
+
+
+        <button
+            type="button"
+            class="profile-save"
+            id="saveAddress">
+
+            Save Address
+
+            <span>
+                →
+            </span>
+
+        </button>
+
+    </div>
+
+</div>
+
+                </div>
+
+
+                <button class="add-address">
+                    + Add New Address
+                </button>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-bottom">
+
+        © 2026 Testy Restaurant.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+const profileNav =
+    document.querySelectorAll(".profile-nav");
+
+const profilePanels =
+    document.querySelectorAll(".profile-panel");
+
+
+profileNav.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const section =
+            button.dataset.section;
+
+        if (!section) return;
+
+
+        profileNav.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+        profilePanels.forEach(panel => {
+
+            panel.classList.remove(
+                "active-panel"
+            );
+
+        });
+
+
+        button.classList.add("active");
+
+
+        document
+            .getElementById(section)
+            .classList.add("active-panel");
+
+    });
+
+});
+
+
+
+/* SAVE PROFILE */
+
+document
+    .getElementById("saveProfile")
+    .addEventListener("click", () => {
+
+        const name =
+            document.getElementById(
+                "userName"
+            ).value;
+
+        const email =
+            document.getElementById(
+                "userEmail"
+            ).value;
+
+
+        document.getElementById(
+            "profileName"
+        ).textContent = name || "User";
+
+
+        document.getElementById(
+            "profileEmail"
+        ).textContent =
+            email || "user@example.com";
+
+
+        document.getElementById(
+            "avatarLetter"
+        ).textContent =
+            name ?
+            name.charAt(0).toUpperCase() :
+            "U";
+
+
+        alert(
+            "Profile updated successfully."
+        );
+
+    });
+
+
+
+/* LOGOUT */
+
+document
+    .getElementById("logoutBtn")
+    .addEventListener("click", () => {
+
+        const confirmLogout =
+            confirm(
+                "Are you sure you want to logout?"
+            );
+
+
+        if (confirmLogout) {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    });
+/* =====================================================
+   ADDRESS MANAGEMENT
+===================================================== */
+
+const editAddressBtn =
+    document.getElementById(
+        "editAddressBtn"
+    );
+
+const addressForm =
+    document.getElementById(
+        "addressForm"
+    );
+
+const cancelAddress =
+    document.getElementById(
+        "cancelAddress"
+    );
+
+const saveAddress =
+    document.getElementById(
+        "saveAddress"
+    );
+
+
+/* =====================================================
+   LOAD SAVED ADDRESS
+===================================================== */
+
+const savedAddress =
+    JSON.parse(
+        localStorage.getItem(
+            "testyAddress"
+        )
+    );
+
+
+function displayAddress(address) {
+
+    if (!address) {
+
+        document.getElementById(
+            "savedAddress"
+        ).textContent =
+            "No address added yet.";
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "savedAddressTitle"
+    ).textContent =
+        address.name || "Home Address";
+
+
+    document.getElementById(
+        "savedAddress"
+    ).textContent =
+
+        address.line +
+        ", " +
+        address.city +
+        ", " +
+        address.state +
+        " - " +
+        address.pin;
+
+}
+
+
+if (savedAddress) {
+
+    displayAddress(
+        savedAddress
+    );
+
+}
+
+
+/* =====================================================
+   EDIT ADDRESS
+===================================================== */
+
+editAddressBtn.addEventListener(
+    "click",
+    function() {
+
+        addressForm.classList.add(
+            "show"
+        );
+
+
+        if (savedAddress) {
+
+            document.getElementById(
+                "addressName"
+            ).value =
+                savedAddress.name || "";
+
+
+            document.getElementById(
+                "addressPhone"
+            ).value =
+                savedAddress.phone || "";
+
+
+            document.getElementById(
+                "addressLine"
+            ).value =
+                savedAddress.line || "";
+
+
+            document.getElementById(
+                "addressCity"
+            ).value =
+                savedAddress.city || "";
+
+
+            document.getElementById(
+                "addressState"
+            ).value =
+                savedAddress.state || "";
+
+
+            document.getElementById(
+                "addressPin"
+            ).value =
+                savedAddress.pin || "";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CANCEL
+===================================================== */
+
+cancelAddress.addEventListener(
+    "click",
+    function() {
+
+        addressForm.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   SAVE ADDRESS
+===================================================== */
+
+saveAddress.addEventListener(
+    "click",
+    function() {
+
+
+        const address = {
+
+            name:
+                document.getElementById(
+                    "addressName"
+                ).value.trim(),
+
+            phone:
+                document.getElementById(
+                    "addressPhone"
+                ).value.trim(),
+
+            line:
+                document.getElementById(
+                    "addressLine"
+                ).value.trim(),
+
+            city:
+                document.getElementById(
+                    "addressCity"
+                ).value.trim(),
+
+            state:
+                document.getElementById(
+                    "addressState"
+                ).value.trim(),
+
+            pin:
+                document.getElementById(
+                    "addressPin"
+                ).value.trim()
+
+        };
+
+
+        /* Validate */
+
+        if (
+            !address.name ||
+            !address.phone ||
+            !address.line ||
+            !address.city ||
+            !address.state ||
+            !address.pin
+        ) {
+
+            alert(
+                "Please fill in all address fields."
+            );
+
+            return;
+
+        }
+
+
+        /* Save */
+
+        localStorage.setItem(
+            "testyAddress",
+            JSON.stringify(
+                address
+            )
+        );
+
+
+        /* Update display */
+
+        displayAddress(
+            address
+        );
+
+
+        /* Hide form */
+
+        addressForm.classList.remove(
+            "show"
+        );
+
+
+        alert(
+            "Address saved successfully!"
+        );
+
+    }
+);
+</script>
+
+
+</body>
+
+</html>

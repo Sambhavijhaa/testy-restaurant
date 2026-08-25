@@ -1,0 +1,412 @@
+/* ===========================
+   Reset
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url("../assets/images/hero.jpg");
+
+    background-size:cover;
+    background-position:center;
+    overflow:hidden;
+}
+
+/* ===========================
+   Login Container
+=========================== */
+
+.login-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* ===========================
+   Login Card
+=========================== */
+
+.login-box{
+
+    width:430px;
+
+    padding:45px;
+
+    border-radius:25px;
+
+    background:rgba(18,18,18,.82);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(212,175,55,.25);
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.55);
+
+}
+
+/* ===========================
+   Logo
+=========================== */
+
+.logo{
+
+    text-align:center;
+
+    color:#D4AF37;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    margin-bottom:15px;
+
+}
+
+/* ===========================
+   Heading
+=========================== */
+
+.login-box h2{
+
+    color:#fff;
+
+    text-align:center;
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.login-box p{
+
+    color:#cfcfcf;
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+.input-box{
+
+    position:relative;
+
+    margin-bottom:22px;
+
+}
+
+.input-box i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#D4AF37;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    padding:16px 18px 16px 50px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:50px;
+
+    background:#222;
+
+    color:#fff;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.input-box input:focus{
+
+    border:1px solid #D4AF37;
+
+    box-shadow:0 0 15px rgba(212,175,55,.35);
+
+}
+
+/* ===========================
+   Remember + Forgot
+=========================== */
+
+.login-options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+    font-size:14px;
+
+}
+
+.login-options label{
+
+    color:#ddd;
+
+}
+
+.login-options a{
+
+    color:#D4AF37;
+
+    text-decoration:none;
+
+}
+
+.login-options a:hover{
+
+    color:#fff;
+
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.login-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#D4AF37;
+
+    color:#111;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.login-btn:hover{
+
+    background:#fff;
+
+    transform:translateY(-3px);
+
+}
+
+/* ===========================
+   Divider
+=========================== */
+
+.divider{
+
+    text-align:center;
+
+    color:#999;
+
+    margin:25px 0;
+
+    position:relative;
+
+}
+
+.divider::before,
+.divider::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:40%;
+
+    height:1px;
+
+    background:#444;
+
+    top:50%;
+
+}
+
+.divider::before{
+
+    left:0;
+
+}
+
+.divider::after{
+
+    right:0;
+
+}
+
+/* ===========================
+   Google Button
+=========================== */
+
+.google-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:50px;
+
+    border:1px solid #555;
+
+    background:transparent;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.google-btn i{
+
+    color:#D4AF37;
+
+    margin-right:8px;
+
+}
+
+.google-btn:hover{
+
+    background:#2a2a2a;
+
+}
+
+/* ===========================
+   Register
+=========================== */
+
+.register-link{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:#ccc;
+
+}
+
+.register-link a{
+
+    color:#D4AF37;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.register-link a:hover{
+
+    color:#fff;
+
+}
+.toggle-password{
+
+    position:absolute;
+
+    right:20px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#999;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.toggle-password:hover{
+
+    color:#D4AF37;
+
+}
+/* ===========================
+   Toast Notification
+=========================== */
+
+.toast{
+
+    position:fixed;
+
+    top:30px;
+
+    right:30px;
+
+    background:#111;
+
+    color:#fff;
+
+    padding:18px 28px;
+
+    border-left:5px solid #D4AF37;
+
+    border-radius:12px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+    transform:translateX(450px);
+
+    transition:.4s;
+
+    z-index:9999;
+
+}
+
+.toast.show{
+
+    transform:translateX(0);
+
+}
