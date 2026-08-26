@@ -13,137 +13,23 @@
 <nav class="navbar">
     <div class="logo">Testy Restaurant</div>
     <div class="menu-toggle">☰</div>
-    <ul class="menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="order.html">Orders</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="cart-icon">🛒 <span id="cartCount">0</span></div>
-    <a href="reservation.html" class="btn">Book Table</a>
+    <ul class="menu"><li><a href="index.html">Home</a></li><li><a href="menu.html">Menu</a></li><li><a href="order.html">Orders</a></li><li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul>
+    <div class="cart-icon">🛒 <span id="cartCount">0</span></div><a href="reservation.html" class="btn">Book Table</a>
 </nav>
-
-<section class="premium-hero">
-    <div class="premium-hero-content">
-        <div class="premium-label">Almost There</div>
-        <h1>Your <span>Checkout</span></h1>
-        <p>Complete your order and enjoy Testy Restaurant at home.</p>
-    </div>
-</section>
-
-<section class="premium-section">
-    <div class="checkout-layout">
-        <div class="checkout-panel">
-            <h2>Your Order</h2>
-            <div id="checkoutItems"></div>
-        </div>
-
-        <div class="checkout-panel checkout-summary">
-            <h2>Order Summary</h2>
-            <div class="summary-row"><span>Subtotal</span><span>₹<span id="subtotal">0.00</span></span></div>
-            <div class="summary-row"><span>Delivery</span><span>₹<span id="deliveryFee">0.00</span></span></div>
-            <div class="summary-total"><span>Total</span><span>₹<span id="total">0.00</span></span></div>
-
-            <br>
-            <h2>Delivery Details</h2>
-            <form id="checkoutForm">
-                <input class="premium-input" id="name" type="text" placeholder="Full Name" required>
-                <input class="premium-input" id="phone" type="tel" placeholder="Phone Number" required>
-                <input class="premium-input" id="email" type="email" placeholder="Email Address" required>
-                <textarea class="premium-input" id="address" placeholder="Delivery Address" required></textarea>
-                <select class="premium-input" id="payment" required>
-                    <option value="">Select Payment Method</option>
-                    <option value="cod">Cash on Delivery</option>
-                    <option value="card">Card on Delivery</option>
-                </select>
-                <button class="gold-btn" type="submit" style="width:100%;">Place Order</button>
-            </form>
-        </div>
-    </div>
-</section>
-
+<section class="premium-hero"><div class="premium-hero-content"><div class="premium-label">Almost There</div><h1>Your <span>Checkout</span></h1><p>Complete your order and enjoy Testy Restaurant at home.</p></div></section>
+<section class="premium-section"><div class="checkout-layout">
+<div class="checkout-panel"><h2>Your Order</h2><div id="checkoutItems"></div></div>
+<div class="checkout-panel checkout-summary"><h2>Order Summary</h2><div class="summary-row"><span>Subtotal</span><span>₹<span id="subtotal">0.00</span></span></div><div class="summary-row"><span>Delivery</span><span>₹<span id="deliveryFee">0.00</span></span></div><div class="summary-total"><span>Total</span><span>₹<span id="total">0.00</span></span></div><br><h2>Delivery Details</h2>
+<form id="checkoutForm"><input class="premium-input" id="name" type="text" placeholder="Full Name" required><input class="premium-input" id="phone" type="tel" placeholder="Phone Number" pattern="[0-9+ ()-]{7,}" required><input class="premium-input" id="email" type="email" placeholder="Email Address" required><textarea class="premium-input" id="address" placeholder="Delivery Address" required></textarea><select class="premium-input" id="payment" required><option value="">Select Payment Method</option><option value="cod">Cash on Delivery</option><option value="card">Card on Delivery</option></select><button class="gold-btn" type="submit" style="width:100%;">Place Order</button></form></div></div></section>
 <script>
+const API_URL = '/api';
 const DELIVERY_FEE = 49;
-let cart = JSON.parse(localStorage.getItem('testyCart') || '[]');
-
-// Support both the old qty format and the newer quantity format.
-cart = cart.map(item => ({ ...item, quantity: Number(item.quantity ?? item.qty ?? 1) }));
-
-function saveCart() {
-    localStorage.setItem('testyCart', JSON.stringify(cart));
-}
-
-function renderCheckout() {
-    const container = document.getElementById('checkoutItems');
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById('cartCount').textContent = count;
-
-    if (!cart.length) {
-        container.innerHTML = '<div style="text-align:center;padding:50px 0;"><h3>Your cart is empty.</h3><p style="color:#999;">Add something delicious first.</p><br><a href="menu.html" class="gold-btn">Browse Menu</a></div>';
-        document.getElementById('subtotal').textContent = '0.00';
-        document.getElementById('deliveryFee').textContent = '0.00';
-        document.getElementById('total').textContent = '0.00';
-        return;
-    }
-
-    let subtotal = 0;
-    container.innerHTML = cart.map((item, index) => {
-        const price = Number(item.price) || 0;
-        const itemTotal = price * item.quantity;
-        subtotal += itemTotal;
-        return `<div class="checkout-item"><div><h3>${escapeHtml(item.name)}</h3><p>₹${price.toFixed(2)} × ${item.quantity}</p></div><div style="text-align:right;"><strong style="color:#f3d675;">₹${itemTotal.toFixed(2)}</strong><br><br><button type="button" onclick="removeItem(${index})" style="background:none;border:none;color:#999;cursor:pointer;">Remove</button></div></div>`;
-    }).join('');
-
-    document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-    document.getElementById('deliveryFee').textContent = DELIVERY_FEE.toFixed(2);
-    document.getElementById('total').textContent = (subtotal + DELIVERY_FEE).toFixed(2);
-}
-
-function removeItem(index) {
-    cart.splice(index, 1);
-    saveCart();
-    renderCheckout();
-}
-
-function escapeHtml(value) {
-    return String(value).replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char]));
-}
-
-document.getElementById('checkoutForm').addEventListener('submit', event => {
-    event.preventDefault();
-    if (!cart.length) {
-        alert('Your cart is empty.');
-        return;
-    }
-
-    const order = {
-        id: 'TR-' + Date.now(),
-        customer: {
-            name: document.getElementById('name').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            address: document.getElementById('address').value.trim()
-        },
-        paymentMethod: document.getElementById('payment').value,
-        items: cart,
-        subtotal: cart.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0),
-        deliveryFee: DELIVERY_FEE,
-        status: 'Pending',
-        createdAt: new Date().toISOString()
-    };
-    order.total = order.subtotal + order.deliveryFee;
-
-    const orders = JSON.parse(localStorage.getItem('testyOrders') || '[]');
-    orders.unshift(order);
-    localStorage.setItem('testyOrders', JSON.stringify(orders));
-    localStorage.removeItem('testyCart');
-    window.location.href = 'order.html';
-});
-
+let cart = JSON.parse(localStorage.getItem('testyCart') || '[]').map(item => ({...item, quantity:Number(item.quantity ?? item.qty ?? 1)}));
+const saveCart=()=>localStorage.setItem('testyCart',JSON.stringify(cart));
+const escapeHtml=v=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function renderCheckout(){const box=document.getElementById('checkoutItems');document.getElementById('cartCount').textContent=cart.reduce((s,i)=>s+i.quantity,0);if(!cart.length){box.innerHTML='<div style="text-align:center;padding:50px 0"><h3>Your cart is empty.</h3><p style="color:#999">Add something delicious first.</p><br><a href="menu.html" class="gold-btn">Browse Menu</a></div>';['subtotal','deliveryFee','total'].forEach(id=>document.getElementById(id).textContent='0.00');return;}let subtotal=0;box.innerHTML=cart.map((item,index)=>{const price=Number(item.price)||0,total=price*item.quantity;subtotal+=total;return `<div class="checkout-item"><div><h3>${escapeHtml(item.name)}</h3><p>₹${price.toFixed(2)} × ${item.quantity}</p></div><div style="text-align:right"><strong style="color:#f3d675">₹${total.toFixed(2)}</strong><br><br><button type="button" onclick="removeItem(${index})" style="background:none;border:none;color:#999;cursor:pointer">Remove</button></div></div>`}).join('');document.getElementById('subtotal').textContent=subtotal.toFixed(2);document.getElementById('deliveryFee').textContent=DELIVERY_FEE.toFixed(2);document.getElementById('total').textContent=(subtotal+DELIVERY_FEE).toFixed(2);}
+function removeItem(i){cart.splice(i,1);saveCart();renderCheckout();}
+document.getElementById('checkoutForm').addEventListener('submit',async e=>{e.preventDefault();if(!cart.length)return alert('Your cart is empty.');const customer={name:document.getElementById('name').value.trim(),phone:document.getElementById('phone').value.trim(),email:document.getElementById('email').value.trim(),address:document.getElementById('address').value.trim()};const payload={customer,items:cart,delivery_fee:DELIVERY_FEE,payment_method:document.getElementById('payment').value};const button=e.submitter;button.disabled=true;button.textContent='Placing Order...';try{const response=await fetch(`${API_URL}/orders`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!response.ok)throw new Error('API unavailable');const order=await response.json();localStorage.setItem('testyLastOrder',JSON.stringify({...order,customer}));localStorage.removeItem('testyCart');window.location.href=`order.html?id=${encodeURIComponent(order.order_number)}`;}catch(error){button.disabled=false;button.textContent='Place Order';alert('Unable to place the order right now. Please make sure the restaurant server is running.');}});
 renderCheckout();
-</script>
-<script src="assets/js/script.js"></script>
-</body>
-</html>
+</script><script src="assets/js/script.js"></script>
+</body></html>
