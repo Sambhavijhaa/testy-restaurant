@@ -1,64 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu Management | Testy Restaurant</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<link rel="stylesheet" href="admin.css">
-</head>
-<body>
-<div class="dashboard">
-<aside class="sidebar">
-<div class="sidebar-logo"><i class="fa-solid fa-utensils"></i><h2>Testy</h2></div>
-<ul>
-<li onclick="location.href='dashboard.html'"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
-<li class="active"><i class="fa-solid fa-bowl-food"></i> Menu</li>
-<li onclick="location.href='orders.html'"><i class="fa-solid fa-cart-shopping"></i> Orders</li>
-<li onclick="location.href='reservations.html'"><i class="fa-solid fa-calendar-check"></i> Reservations</li>
-<li onclick="location.href='customers.html'"><i class="fa-solid fa-users"></i> Customers</li>
-<li onclick="location.href='settings.html'"><i class="fa-solid fa-gear"></i> Settings</li>
-</ul>
-</aside>
-<main class="main-content">
-<div class="topbar"><h1>Menu Management</h1><div class="admin-profile"><i class="fa-solid fa-user"></i> Administrator</div></div>
-<div class="menu-form">
-<h2>Add New Food</h2>
-<form id="foodForm">
-<div class="form-grid">
-<input type="text" placeholder="Food Name" id="foodName" required>
-<select id="foodCategory"><option>Pizza</option><option>Burger</option><option>Pasta</option><option>Chicken</option><option>Salad</option><option>Drinks</option><option>Dessert</option></select>
-<input type="number" min="0" step="0.01" placeholder="Price (₹)" id="foodPrice" required>
-<select id="foodStatus"><option>Available</option><option>Unavailable</option></select>
-<input type="file" id="foodImage" accept="image/*">
-</div>
-<textarea id="foodDescription" placeholder="Food Description"></textarea>
-<button type="submit" class="admin-btn">Add Food</button>
-</form>
-</div>
-<div class="food-list">
-<div class="section-header"><h2>Food Menu</h2><button type="button" class="view-all-btn" id="addCategoryBtn">+ Add Category</button></div>
-<table>
-<thead><tr><th>Image</th><th>Food Name</th><th>Category</th><th>Price</th><th>Status</th><th>Action</th></tr></thead>
-<tbody id="foodTableBody">
-<tr data-food-id="burger-1"><td><img src="../assets/images/food1.jpg" class="food-img" alt="Classic Burger"></td><td>Classic Burger</td><td>Burger</td><td>₹249</td><td><span class="status completed">Available</span></td><td><button type="button" class="edit-btn" aria-label="Edit Classic Burger"><i class="fa-solid fa-pen"></i></button><button type="button" class="delete-btn" aria-label="Delete Classic Burger"><i class="fa-solid fa-trash"></i></button></td></tr>
-<tr data-food-id="pizza-1"><td><img src="../assets/images/food2.jpg" class="food-img" alt="Italian Pizza"></td><td>Italian Pizza</td><td>Pizza</td><td>₹399</td><td><span class="status completed">Available</span></td><td><button type="button" class="edit-btn" aria-label="Edit Italian Pizza"><i class="fa-solid fa-pen"></i></button><button type="button" class="delete-btn" aria-label="Delete Italian Pizza"><i class="fa-solid fa-trash"></i></button></td></tr>
-<tr data-food-id="pasta-1"><td><img src="../assets/images/food3.jpg" class="food-img" alt="Creamy Pasta"></td><td>Creamy Pasta</td><td>Pasta</td><td>₹299</td><td><span class="status pending">Unavailable</span></td><td><button type="button" class="edit-btn" aria-label="Edit Creamy Pasta"><i class="fa-solid fa-pen"></i></button><button type="button" class="delete-btn" aria-label="Delete Creamy Pasta"><i class="fa-solid fa-trash"></i></button></td></tr>
-</tbody>
-</table>
-</div>
-</main>
-</div>
-<script src="admin.js"></script>
-<script>
-const form=document.getElementById('foodForm');
-const table=document.getElementById('foodTableBody');
-form.addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('foodName').value.trim();const category=document.getElementById('foodCategory').value;const price=Number(document.getElementById('foodPrice').value);const status=document.getElementById('foodStatus').value;if(!name||!Number.isFinite(price)||price<0)return;const row=document.createElement('tr');row.innerHTML=`<td>—</td><td>${name}</td><td>${category}</td><td>₹${price.toFixed(2)}</td><td><span class="status ${status==='Available'?'completed':'pending'}">${status}</span></td><td><button type="button" class="delete-btn" aria-label="Delete ${name}"><i class="fa-solid fa-trash"></i></button></td>`;table.appendChild(row);form.reset();});
-table.addEventListener('click',e=>{const deleteButton=e.target.closest('.delete-btn');if(deleteButton){deleteButton.closest('tr').remove();}});
-document.getElementById('addCategoryBtn').addEventListener('click',()=>{const category=prompt('Enter new category name:');if(category&&category.trim()){const select=document.getElementById('foodCategory');const option=document.createElement('option');option.textContent=category.trim();select.appendChild(option);select.value=category.trim();}});
-</script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Menu Management | Testy Restaurant</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"><link rel="stylesheet" href="admin.css"></head><body><div class="dashboard"><aside class="sidebar"><div class="sidebar-logo"><i class="fa-solid fa-utensils"></i><h2>Testy</h2></div><ul><li onclick="location.href='dashboard.html'"><i class="fa-solid fa-chart-line"></i> Dashboard</li><li class="active"><i class="fa-solid fa-bowl-food"></i> Menu</li><li onclick="location.href='orders.html'"><i class="fa-solid fa-cart-shopping"></i> Orders</li><li onclick="location.href='reservations.html'"><i class="fa-solid fa-calendar-check"></i> Reservations</li><li onclick="location.href='customers.html'"><i class="fa-solid fa-users"></i> Customers</li><li onclick="location.href='settings.html'"><i class="fa-solid fa-gear"></i> Settings</li></ul></aside><main class="main-content"><div class="topbar"><h1>Menu Management</h1><div class="admin-profile"><i class="fa-solid fa-user"></i> Administrator</div></div><div class="menu-form"><h2>Add New Food</h2><form id="foodForm"><div class="form-grid"><input type="text" placeholder="Food Name" id="foodName" required><select id="foodCategory"><option>Pizza</option><option>Burger</option><option>Pasta</option><option>Chicken</option><option>Salad</option><option>Drinks</option><option>Dessert</option></select><input type="number" min="0" step="0.01" placeholder="Price (₹)" id="foodPrice" required><select id="foodStatus"><option>Available</option><option>Unavailable</option></select><input type="url" id="foodImage" placeholder="Image URL (optional)"></div><textarea id="foodDescription" placeholder="Food Description"></textarea><button type="submit" class="admin-btn">Add Food</button></form></div><div class="food-list"><div class="section-header"><h2>Food Menu</h2></div><table><thead><tr><th>Image</th><th>Food Name</th><th>Category</th><th>Price</th><th>Status</th><th>Action</th></tr></thead><tbody id="foodTableBody"></tbody></table></div></main></div><script>
+const API='/api';let items=[];const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+async function loadMenu(){const body=document.getElementById('foodTableBody');body.innerHTML='<tr><td colspan="6">Loading menu...</td></tr>';try{const r=await fetch(`${API}/menu`);if(!r.ok)throw new Error();items=await r.json();render();}catch(e){body.innerHTML='<tr><td colspan="6">Unable to load menu. Start the Flask backend and refresh.</td></tr>';}}
+function render(){document.getElementById('foodTableBody').innerHTML=items.length?items.map(i=>`<tr><td>${i.image?`<img src="${esc(i.image)}" class="food-img" alt="${esc(i.name)}">`:'—'}</td><td>${esc(i.name)}</td><td>${esc(i.category)}</td><td>₹${Number(i.price).toFixed(2)}</td><td><span class="status ${i.status==='Available'?'completed':'pending'}">${esc(i.status)}</span></td><td><button type="button" class="delete-btn" onclick="deleteItem(${i.id})" aria-label="Delete ${esc(i.name)}"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''):'<tr><td colspan="6">No menu items found.</td></tr>'}
+document.getElementById('foodForm').addEventListener('submit',async e=>{e.preventDefault();const payload={name:document.getElementById('foodName').value.trim(),category:document.getElementById('foodCategory').value,price:Number(document.getElementById('foodPrice').value),status:document.getElementById('foodStatus').value,image:document.getElementById('foodImage').value.trim(),description:document.getElementById('foodDescription').value.trim()};if(!payload.name||!Number.isFinite(payload.price)||payload.price<0)return;try{const r=await fetch(`${API}/menu`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error();items.unshift(await r.json());render();e.target.reset();}catch(err){alert('Could not add food. Check the backend connection.');}});
+async function deleteItem(id){if(!confirm('Delete this food item?'))return;try{const r=await fetch(`${API}/menu/${id}`,{method:'DELETE'});if(!r.ok)throw new Error();items=items.filter(i=>i.id!==id);render();}catch(e){alert('Delete is not available yet on the backend.');}}
+loadMenu();
+</script></body></html>
