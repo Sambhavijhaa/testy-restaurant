@@ -6,7 +6,6 @@ from datetime import datetime
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = BASE_DIR / "testy.db"
-
 app = Flask(__name__)
 CORS(app)
 
@@ -77,7 +76,15 @@ def health():
 @app.get('/api/menu')
 def menu():
     conn = get_db()
-    rows = conn.execute('SELECT * FROM menu_items ORDER BY category, name').fetchall()
+    rows = conn.execute("SELECT * FROM menu_items WHERE status = 'Available' ORDER BY category, name").fetchall()
+    conn.close()
+    return jsonify([dict(row) for row in rows])
+
+
+@app.get('/api/admin/menu')
+def admin_menu():
+    conn = get_db()
+    rows = conn.execute('SELECT * FROM menu_items ORDER BY id DESC').fetchall()
     conn.close()
     return jsonify([dict(row) for row in rows])
 
@@ -85,28 +92,68 @@ def menu():
 @app.post('/api/menu')
 def create_menu_item():
     data = request.get_json() or {}
-    required = ['name', 'category', 'price']
-    if any(not data.get(field) for field in required):
+    if not data.get('name') or not data.get('category') or data.get('price') is None:
         return jsonify({'error': 'name, category and price are required'}), 400
+    try:
+        price = float(data['price'])
+    except (TypeError, ValueError):
+        return jsonify({'error': 'price must be a number'}), 400
+    if price < 0:
+        return jsonify({'error': 'price cannot be negative'}), 400
     conn = get_db()
-    cur = conn.execute(
-        '''INSERT INTO menu_items (name, category, description, price, image, status, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?)''',
-        (data['name'], data['category'], data.get('description', ''), float(data['price']),
-         data.get('image', ''), data.get('status', 'Available'), datetime.utcnow().isoformat())
-    )
+    cur = conn.execute('''INSERT INTO menu_items (name, category, description, price, image, status, created_at)
+                          VALUES (?, ?, ?, ?, ?, ?, ?)''',
+                       (data['name'].strip(), data['category'], data.get('description', ''), price,
+                        data.get('image', ''), data.get('status', 'Available'), datetime.utcnow().isoformat()))
     conn.commit()
     item = conn.execute('SELECT * FROM menu_items WHERE id = ?', (cur.lastrowid,)).fetchone()
     conn.close()
     return jsonify(dict(item)), 201
 
 
+@app.patch('/api/menu/<int:item_id>')
+def update_menu_item(item_id):
+    data = request.get_json() or {}
+    allowed = {'name', 'category', 'description', 'price', 'image', 'status'}
+    updates = {k: data[k] for k in allowed if k in data}
+    if 'price' in updates:
+        try:
+            updates['price'] = float(updates['price'])
+            if updates['price'] < 0:
+                raise ValueError
+        except (TypeError, ValueError):
+            return jsonify({'error': 'price must be a non-negative number'}), 400
+    if not updates:
+        return jsonify({'error': 'no fields to update'}), 400
+    conn = get_db()
+    assignments = ', '.join(f'{key} = ?' for key in updates)
+    cur = conn.execute(f'UPDATE menu_items SET {assignments} WHERE id = ?', (*updates.values(), item_id))
+    conn.commit()
+    if cur.rowcount == 0:
+        conn.close()
+        return jsonify({'error': 'Menu item not found'}), 404
+    item = conn.execute('SELECT * FROM menu_items WHERE id = ?', (item_id,)).fetchone()
+    conn.close()
+    return jsonify(dict(item))
+
+
+@app.delete('/api/menu/<int:item_id>')
+def delete_menu_item(item_id):
+    conn = get_db()
+    cur = conn.execute('DELETE FROM menu_items WHERE id = ?', (item_id,))
+    conn.commit()
+    conn.close()
+    if cur.rowcount == 0:
+        return jsonify({'error': 'Menu item not found'}), 404
+    return jsonify({'success': True})
+
+
 @app.get('/api/orders')
 def orders():
     conn = get_db()
-    orders = conn.execute('SELECT * FROM orders ORDER BY id DESC').fetchall()
+    rows = conn.execute('SELECT * FROM orders ORDER BY id DESC').fetchall()
     result = []
-    for order in orders:
+    for order in rows:
         item_rows = conn.execute('SELECT * FROM order_items WHERE order_id = ?', (order['id'],)).fetchall()
         item = dict(order)
         item['items'] = [dict(row) for row in item_rows]
@@ -118,32 +165,24 @@ def orders():
 @app.post('/api/orders')
 def create_order():
     data = request.get_json() or {}
-    customer = data.get('customer', {})
-    items = data.get('items', [])
+    customer, items = data.get('customer', {}), data.get('items', [])
     if not customer.get('name') or not customer.get('phone') or not items:
         return jsonify({'error': 'customer name, phone and items are required'}), 400
-
     subtotal = sum(float(item.get('price', 0)) * int(item.get('quantity', 1)) for item in items)
     delivery_fee = float(data.get('delivery_fee', 49))
     total = subtotal + delivery_fee
     now = datetime.utcnow().isoformat()
     order_number = 'TR-' + datetime.utcnow().strftime('%Y%m%d%H%M%S%f')[:17]
-
     conn = get_db()
-    cur = conn.execute(
-        '''INSERT INTO orders (order_number, customer_name, phone, address, payment_method,
-           subtotal, delivery_fee, total, status, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Pending', ?)''',
-        (order_number, customer['name'], customer['phone'], customer.get('address', ''),
-         data.get('payment_method', 'Cash on Delivery'), subtotal, delivery_fee, total, now)
-    )
-    order_id = cur.lastrowid
+    cur = conn.execute('''INSERT INTO orders (order_number, customer_name, phone, address, payment_method,
+                       subtotal, delivery_fee, total, status, created_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Pending', ?)''',
+                       (order_number, customer['name'], customer['phone'], customer.get('address', ''),
+                        data.get('payment_method', 'Cash on Delivery'), subtotal, delivery_fee, total, now))
     for item in items:
-        conn.execute(
-            '''INSERT INTO order_items (order_id, menu_item_id, name, price, quantity)
-               VALUES (?, ?, ?, ?, ?)''',
-            (order_id, item.get('id'), item.get('name', 'Item'), float(item.get('price', 0)), int(item.get('quantity', 1)))
-        )
+        conn.execute('''INSERT INTO order_items (order_id, menu_item_id, name, price, quantity)
+                        VALUES (?, ?, ?, ?, ?)''',
+                     (cur.lastrowid, item.get('id'), item.get('name', 'Item'), float(item.get('price', 0)), int(item.get('quantity', 1))))
     conn.commit()
     conn.close()
     return jsonify({'order_number': order_number, 'status': 'Pending', 'subtotal': subtotal,
@@ -152,15 +191,12 @@ def create_order():
 
 @app.patch('/api/orders/<int:order_id>/status')
 def update_order_status(order_id):
-    data = request.get_json() or {}
-    status = data.get('status')
-    allowed = {'Pending', 'Confirmed', 'Preparing', 'Ready', 'Completed', 'Cancelled'}
-    if status not in allowed:
+    status = (request.get_json() or {}).get('status')
+    if status not in {'Pending', 'Confirmed', 'Preparing', 'Ready', 'Completed', 'Cancelled'}:
         return jsonify({'error': 'Invalid order status'}), 400
     conn = get_db()
     cur = conn.execute('UPDATE orders SET status = ? WHERE id = ?', (status, order_id))
-    conn.commit()
-    conn.close()
+    conn.commit(); conn.close()
     if cur.rowcount == 0:
         return jsonify({'error': 'Order not found'}), 404
     return jsonify({'success': True, 'status': status})
@@ -168,9 +204,7 @@ def update_order_status(order_id):
 
 @app.get('/api/reservations')
 def reservations():
-    conn = get_db()
-    rows = conn.execute('SELECT * FROM reservations ORDER BY date, time').fetchall()
-    conn.close()
+    conn = get_db(); rows = conn.execute('SELECT * FROM reservations ORDER BY date, time').fetchall(); conn.close()
     return jsonify([dict(row) for row in rows])
 
 
@@ -182,14 +216,11 @@ def create_reservation():
         return jsonify({'error': 'name, phone, date, time and guests are required'}), 400
     booking_number = 'TB-' + datetime.utcnow().strftime('%Y%m%d%H%M%S%f')[:17]
     conn = get_db()
-    conn.execute(
-        '''INSERT INTO reservations (booking_number, name, phone, date, time, guests, request, status, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending', ?)''',
-        (booking_number, data['name'], data['phone'], data['date'], data['time'], int(data['guests']),
-         data.get('request', ''), datetime.utcnow().isoformat())
-    )
-    conn.commit()
-    conn.close()
+    conn.execute('''INSERT INTO reservations (booking_number, name, phone, date, time, guests, request, status, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending', ?)''',
+                 (booking_number, data['name'], data['phone'], data['date'], data['time'], int(data['guests']),
+                  data.get('request', ''), datetime.utcnow().isoformat()))
+    conn.commit(); conn.close()
     return jsonify({'booking_number': booking_number, 'status': 'Pending'}), 201
 
 
@@ -198,16 +229,12 @@ def update_reservation_status(reservation_id):
     status = (request.get_json() or {}).get('status')
     if status not in {'Pending', 'Confirmed', 'Rejected', 'Completed'}:
         return jsonify({'error': 'Invalid reservation status'}), 400
-    conn = get_db()
-    cur = conn.execute('UPDATE reservations SET status = ? WHERE id = ?', (status, reservation_id))
-    conn.commit()
-    conn.close()
+    conn = get_db(); cur = conn.execute('UPDATE reservations SET status = ? WHERE id = ?', (status, reservation_id)); conn.commit(); conn.close()
     if cur.rowcount == 0:
         return jsonify({'error': 'Reservation not found'}), 404
     return jsonify({'success': True, 'status': status})
 
 
 init_db()
-
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
